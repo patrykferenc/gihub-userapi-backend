@@ -1,4 +1,4 @@
-package dev.patrykferenc.githubinfo.entities;
+package dev.patrykferenc.githubinfo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

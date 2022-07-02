@@ -1,4 +1,4 @@
-package dev.patrykferenc.githubinfo.entities;
+package dev.patrykferenc.githubinfo.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +15,10 @@ import java.util.Map;
 public class UserStatistics {
 
     private User user;
-    private List<Repository> repositories;
+    private List<Repo> repositories;
     private Map<String, Long> languages;
 
-    public UserStatistics(User user, List<Repository> repositories) {
+    public UserStatistics(User user, List<Repo> repositories) {
         this.user = user;
         this.repositories = repositories;
         this.languages = generateLanguageStatsFromRepos();
@@ -26,7 +26,7 @@ public class UserStatistics {
 
     private Map<String, Long> generateLanguageStatsFromRepos() {
         var stats = new HashMap<String, Long>();
-        for (Repository r : repositories) {
+        for (Repo r : repositories) {
             for (String key : r.getLanguageStats().keySet())
                 stats.put(key, stats.getOrDefault(key, 0L) + r.getLanguageStats().get(key));
         }

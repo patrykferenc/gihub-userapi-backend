@@ -1,7 +1,7 @@
 package dev.patrykferenc.githubinfo.clients;
 
-import dev.patrykferenc.githubinfo.entities.Repository;
-import dev.patrykferenc.githubinfo.entities.User;
+import dev.patrykferenc.githubinfo.model.Repo;
+import dev.patrykferenc.githubinfo.model.User;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 
 @Component
-public class GithubClient {
+public class GithubClient implements GithubUserInfoProvider {
 
     private static final String GITHUB_API_USER_LINK = "https://api.github.com/users";
     private static final String GITHUB_API_REPO_LINK = "https://api.github.com/repos";
@@ -35,13 +35,13 @@ public class GithubClient {
                 .bodyToMono(User.class);
     }
 
-    public Flux<Repository> getRepos(String username) {
+    public Flux<Repo> getRepos(String username) {
         return this.client
                 .get()
                 .uri(String.format("%s/%s/repos", GITHUB_API_USER_LINK, username))
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToFlux(Repository.class);
+                .bodyToFlux(Repo.class);
     }
 
     public Flux<Map<String, Long>> getLanguages(String username, String repository) {

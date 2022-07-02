@@ -1,8 +1,8 @@
 package dev.patrykferenc.githubinfo.controllers;
 
 import dev.patrykferenc.githubinfo.clients.GithubClient;
-import dev.patrykferenc.githubinfo.entities.Repository;
-import dev.patrykferenc.githubinfo.entities.UserStatistics;
+import dev.patrykferenc.githubinfo.model.Repo;
+import dev.patrykferenc.githubinfo.model.UserStatistics;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +30,7 @@ public class UserStatsController {
                     log.debug("Getting language stats for repository: {}", repository.getName());
                     return githubClient.getLanguages(username, repository.getName()).map(lang -> {
                         log.trace("Languages: {}", lang);
-                        return new Repository(repository.getName(), lang);
+                        return new Repo(repository.getName(), lang);
                     });
                 }).collectList(),
                 UserStatistics::new);
