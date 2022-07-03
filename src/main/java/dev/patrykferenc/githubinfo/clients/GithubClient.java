@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 
 @Component
-public class GithubClient implements GithubUserInfoProvider {
+public class GithubClient implements GithubUserStatisticsRetriever {
 
     private static final String GITHUB_API_USER_LINK = "https://api.github.com/users";
     private static final String GITHUB_API_REPO_LINK = "https://api.github.com/repos";

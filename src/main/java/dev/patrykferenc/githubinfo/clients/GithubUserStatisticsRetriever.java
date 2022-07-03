@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
-public interface GithubUserInfoProvider {
+public interface GithubUserStatisticsRetriever {
 
     Mono<User> getUser(String username);
 
